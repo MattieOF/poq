@@ -87,6 +87,11 @@ public class Game
                 // TODO: Log error
                 return false;
             }
+
+            GameWindow.IsVisible = false; // Set the window to be invisible so it doesn't flash in the wrong place
+            GameWindow.Initialize();
+            GameWindow.Center();
+            GameWindow.IsVisible = true;
         }
 
         return true;
@@ -130,6 +135,7 @@ public class Game
         {
             GameWindow.Close();
             GameWindow.Dispose();
+            GameWindow = null;
         }
     }
 
