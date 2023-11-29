@@ -36,7 +36,7 @@ public class Game
     /// <summary>
     /// Is the game currently running? Set to true by Init, set to false by CleanUp.
     /// </summary>
-    public bool Running { get; private set; } = false;
+    public bool Running { get; private set; }
     /// <summary>
     /// If false, the game will not be closed when <see cref="Close"/> is called.
     /// </summary>

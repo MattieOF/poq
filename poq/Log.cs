@@ -18,8 +18,8 @@ public record struct LogCategory(
 
 public static class Log
 {
-    internal static LogCategory CoreEngine = new("poqCore", LogLevel.Trace, LogLevel.Info);
-    internal static LogCategory Logger = new("poqLog", LogLevel.Trace, LogLevel.Info);
+    internal static LogCategory CoreEngine = new("poqCore");
+    internal static LogCategory Logger = new("poqLog");
 
     public static TimeSpan LogFileFlushInterval
     {
@@ -27,12 +27,12 @@ public static class Log
         set => SetLogFileFlushInterval(value);
     }
     
-    public static bool Initialised { get; private set; } = false;
+    public static bool Initialised { get; private set; }
     public static readonly bool LogToFile = true;
     public static readonly bool LogToConsole = true;
     
     private static TextWriter? _logFile;
-    private static Timer _logFlushTimer = new(state => _logFile?.Flush());
+    private static Timer _logFlushTimer = new(_ => _logFile?.Flush());
     private static TimeSpan _logFileFlushInterval = TimeSpan.FromSeconds(5);
 
     public static void Init()
