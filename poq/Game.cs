@@ -82,7 +82,7 @@ public class Game
             GameWindow = Window.Create(WindowOptions.DefaultVulkan with
             {
                 API = GraphicsAPI.DefaultVulkan with { Version = new APIVersion(1, 2) },
-                Title = GetWindowTitle()
+                Title = GetDesiredWindowTitle()
             });
             
             if (GameWindow is null)
@@ -177,7 +177,7 @@ public class Game
     /// Use the current title format to get the desired window title
     /// </summary>
     /// <returns>The desired window title based of the current format; either defined by <see cref="TitleOverride"/> or <see cref="Spec"/></returns>
-    public string GetWindowTitle()
+    public string GetDesiredWindowTitle()
     {
         if (TitleOverride is not null)
             return GetFormattedTitle(TitleOverride);
