@@ -111,7 +111,7 @@ public static class Log
         return level switch
         {
             LogLevel.Trace => ConsoleColor.Gray,
-            LogLevel.Info => ConsoleColor.White,
+            LogLevel.Info => ConsoleColor.Green,
             LogLevel.Warn => ConsoleColor.Yellow,
             LogLevel.Error => ConsoleColor.Red,
             LogLevel.Fatal => ConsoleColor.DarkRed,
