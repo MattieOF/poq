@@ -74,6 +74,9 @@ public class Game
     /// <returns>True if successful, false if not. Any errors are logged by this function.</returns>
     protected bool Init()
     {
+        Log.Init(); // This will silently return if we're already initialised
+        Log.CoreEngine.Info($"Initialising {Spec.Name}");
+        
         if (GameWindow is null)
         {
             GameWindow = Window.Create(WindowOptions.DefaultVulkan with
@@ -84,7 +87,7 @@ public class Game
             
             if (GameWindow is null)
             {
-                // TODO: Log error
+                Log.CoreEngine.Fatal($"Failed to initialise window!");
                 return false;
             }
 
@@ -130,6 +133,8 @@ public class Game
     /// </summary>
     protected void CleanUp()
     {
+        Log.CoreEngine.Info("Cleaning up");
+        
         Running = false;
         if (GameWindow is not null)
         {
@@ -137,6 +142,18 @@ public class Game
             GameWindow.Dispose();
             GameWindow = null;
         }
+    }
+
+    protected void Shutdown()
+    {
+        if (Running)
+        {
+            Log.CoreEngine.Error("Attempted to shut down while still running - call CleanUp() first!");
+            return;
+        }
+
+        Log.CoreEngine.Info("Shutting down.");
+        Log.Shutdown();
     }
 
     /// <summary>
@@ -150,7 +167,10 @@ public class Game
             if (!Init()) return;
             GameWindow!.Run();
             CleanUp();
+            Log.Flush();
         } while (RequestingRestart);
+        
+        Shutdown();
     }
 
     /// <summary>
