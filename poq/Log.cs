@@ -91,7 +91,7 @@ public static class Log
         if (level < category.Minimum)
             return;
 
-        var formatted = $"[{DateTime.Now:t} {category.Name}] {message}";
+        var formatted = $"[{DateTime.Now:HH:mm:ss.fff} {category.Name} {level.ToString()}] {message}";
         
         if (LogToConsole)
         {
