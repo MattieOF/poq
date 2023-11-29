@@ -34,7 +34,7 @@ public struct GameSpecification
 public class Game
 {
     /// <summary>
-    /// Is the game currently running? Set to true by Init, set to false by CleanUp.
+    /// Is the game currently running? Set to true by the constructor, set to false once the game loop has finished.
     /// </summary>
     public bool Running { get; private set; }
     /// <summary>
@@ -66,6 +66,7 @@ public class Game
     protected Game(GameSpecification gameSpec)
     {
         Spec = gameSpec;
+        OS.GlobalGame = Spec;
     }
 
     /// <summary>
@@ -95,6 +96,10 @@ public class Game
             GameWindow.Initialize();
             GameWindow.Center();
             GameWindow.IsVisible = true;
+            
+            OS.ShowInfoAlert("hello!!");
+            OS.ShowWarnAlert("just fyi!!", "warn");
+            OS.ShowErrorAlert("uh oh!!", "fuck");
         }
 
         return true;
